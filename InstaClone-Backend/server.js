@@ -21,8 +21,8 @@ app.use(body_parser.urlencoded({ limit: "20mb", extended: true }))
 
 //! Routes
 
-app.use("/auth", require("./Controllers/Auth"))
-
+app.use("/auth", require("./Routes/Auth.js"))
+app.use("/user", require("./Routes/User.js"))
 
 
 const PORT = 3010 || process.env.PORT
