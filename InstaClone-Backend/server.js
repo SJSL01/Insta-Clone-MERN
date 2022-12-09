@@ -23,6 +23,7 @@ app.use(body_parser.urlencoded({ limit: "20mb", extended: true }))
 
 app.use("/auth", require("./Routes/Auth.js"))
 app.use("/user", require("./Routes/User.js"))
+app.use("/posts", require("./Routes/Posts.js"))
 
 
 const PORT = 3010 || process.env.PORT
