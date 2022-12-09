@@ -15,7 +15,9 @@ router.get("/:id/followers", JWT_AUTH, getUserFollowers)
 router.get("/:id/following", JWT_AUTH, getUserFollowing)
 
 //? addRemove Following
-router.get("/:id/:/:followingId", JWT_AUTH, addRemoveFollowing)
+router.put("/:id/:/:followingId", JWT_AUTH, addRemoveFollowing)
 
 //? addRemove Followers
-router.get("/:id/:followerid", JWT_AUTH, addRemoveFollowers)
+router.put("/:id/:followerId", JWT_AUTH, addRemoveFollowers)
+
+module.exports = router;
