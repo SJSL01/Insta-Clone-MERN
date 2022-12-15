@@ -1,0 +1,116 @@
+.profile-container {
+    margin-left: 5vw;
+    height: 100%;
+    width: 100vw;
+}
+
+.profile-head {
+    margin-top: 5vh;
+    margin-left: 20vw;
+    margin-right: 30vw;
+    display: flex;
+    justify-content: space-around;
+    /* align-items: center; */
+    height: 25vh;
+    /* background-color: aqua; */
+}
+
+.profile-img {
+
+    height: 180px;
+    width: 180px;
+}
+
+.profile-img img {
+    border-radius: 50%;
+    width: 100%;
+}
+
+.usernameSettings {
+    width: 18vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+.userStats span {
+    margin: 0 1vw;
+}
+
+.additional-info {
+    margin: 20px 0;
+}
+
+.additional-info span {
+    margin: 0 1vw;
+}
+
+
+.createPost {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0vh 18vw;
+    width: 10vw;
+    /* background-color: aqua; */
+}
+
+.createPost button {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    /* font-size: 50px; */
+}
+
+.createPost small {
+    margin-top: -15px;
+}
+
+
+hr {
+    margin: 20px auto;
+    width: 80%;
+}
+
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    margin: 0 9vw;
+    /* background-color: aqua; */
+    display: flex;
+}
+
+.posts {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    /* background-color: rgb(93, 93, 92); */
+}
+
+.posts div {
+    height: 200px;
+    width: 300px;
+    margin: 10px 2px;
+    overflow: hidden;
+    /* background-color: yellowgreen; */
+    border: 1px solid black;
+}
+
+.posts img{
+    height: 100%;
+    width: 100%;
+}
+
+.posts div img:hover {
+    scale: 1.2;
+    rotate: -5deg;
+    transition: 1s;
+}
+
+.posts div img:not(:hover) {
+    /* filter: blur(2px); */
+    transition: 0.5s;
+}

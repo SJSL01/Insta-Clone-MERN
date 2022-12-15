@@ -1,0 +1,15 @@
+.chatHeadings {
+    width: 15vw;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+        /* flex-direction: column; */
+}
+
+.chatHeadings img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+}

@@ -1,0 +1,13 @@
+.home-container{
+    background-color: rgb(251, 146, 146);
+    margin: 0 10vw 0 20vw;
+}
+
+.suggestions{
+    position: relative;
+    top: 10vh;
+    left: 10vw;
+    height: 45vh;
+    width: 20vw;
+    /* border: 1px solid black; */
+}

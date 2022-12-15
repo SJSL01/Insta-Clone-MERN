@@ -1,0 +1,56 @@
+.text-messages {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    cursor: default;
+    /* margin: 0 5px; */
+}
+
+.userMessage {
+    /* margin-left: 3vh; */
+    display: inline-block;
+    text-align: right;
+    /* width: 8vw; */
+    padding: 5px;
+    overflow-wrap: break-word;
+    border-radius: 20px;
+    align-self: flex-end;
+    background-color: lightblue
+}
+
+.friendMessage {
+    display: inline-block;
+    text-align: left;
+    /* width: 8vw; */
+    overflow-wrap: break-word;
+    padding: 5px;
+    border-radius: 20px;
+    align-self: flex-start;
+    background-color: lightcoral
+}
+
+.usertime {
+    align-self: flex-end;
+    font-size: 10px;
+    margin-bottom: 10px;
+}
+
+.friendtime {
+    align-self: flex-start;
+    font-size: 10px;
+    margin-bottom: 10px;
+}
+
+.user {
+    align-self: flex-end;
+    font-size: 15px;
+    font-weight: bold;
+    /* margin-bottom: 10px; */
+}
+
+.friend {
+    align-self: flex-start;
+    font-size: 15px;
+    font-weight: bold;
+    /* margin-bottom: 10px; */
+}

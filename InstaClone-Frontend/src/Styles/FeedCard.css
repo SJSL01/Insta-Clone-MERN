@@ -1,0 +1,79 @@
+
+.card-Container {
+    border: 2px solid grey;
+    padding: 10px 20px;
+    margin: 25px;
+    box-shadow: 1px 1px 20px 2px rgba(0, 0, 0, 0.662);
+    max-height: 700px;
+    border-radius: 10px;
+}
+
+
+.cardHead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 30px;
+   
+}
+
+.Uname {
+    font-weight: bold;
+
+}
+
+.location {
+    font-size: 20px;
+    font-weight: lighter;
+    position: relative;
+    top: -10px;
+}
+
+
+.imgPOST {
+    height: 300px;
+    margin: 10px -20px;
+}
+
+
+.post_image {
+    width: 100%;
+    height: 100%;
+}
+
+.like_share_date {
+    display: flex;
+    justify-content: space-between;
+}
+
+.like {
+
+    font-size: 20px;
+    font-weight: lighter;
+}
+
+.desc {
+    font-weight: 600;
+}
+
+
+
+
+@media only screen and (min-width: 500px) {
+    .card-Container {
+        width: 60%;
+    }
+}
+
+@media only screen and (min-width: 700) {
+    .card-Container {
+        width: 50%;
+    }
+}
+
+
+@media only screen and (min-width: 950px) {
+    .card-Container {
+        width: 35%;
+    }
+}
