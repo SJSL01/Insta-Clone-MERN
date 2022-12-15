@@ -8,11 +8,9 @@ const PostSchema = mongoose.Schema({
         type: mongoose.Types.ObjectId,
     },
 
-    Fname: String,
+    username: String,
 
-    Lname: String,
-
-    Avatar: String,
+    avatar: String,
 
     postImage: String,
 

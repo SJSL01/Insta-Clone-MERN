@@ -4,8 +4,9 @@ const jwt = require('jsonwebtoken')
 const JWT_AUTH = async (req, res, next) => {
 
     try {
-
-        let token = req.header("Authorization")
+        // console.log(req.headers);
+        let token = req.headers.authorization
+        // console.log("token "+token);
 
 
         if (!token) return res.status(403).send("Access Forbidden")

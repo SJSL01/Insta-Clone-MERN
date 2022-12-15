@@ -4,25 +4,38 @@ const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 const User = require("../Models/User")
 const { body, validationResult } = require("express-validator")
+const JWT_AUTH = require("../Middlewares/JWT_AUTH")
 
-
+router.post("/isLoggedIn", JWT_AUTH, async (req, res) => {
+    try {
+        const user = await User.find({ _id: res.user.id })
+        console.log(user);
+        return res.status(200).json({ user: user })
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+})
 
 router.post("/login", async (req, res) => {
 
     try {
-        const { Email, Password } = req.body
+        const { email, password } = req.body
 
-        const getUser = await User.findOne({ Email: Email })
+        console.log(req.body);
 
-        if (!getUser) return res.status(400).json({ error: `No User with ${Email} Found.` })
+        const getUser = await User.find({ email: email })
 
-        const doesPasswordMatches = await bcrypt.compare(Password, getUser.Password)
+        console.log(getUser);
+
+        if (getUser === null) return res.status(400).json({ error: `No User with ${email} Found.` })
+
+        const doesPasswordMatches = await bcrypt.compare(password, getUser[0].password)
 
         if (!doesPasswordMatches) return res.status(400).json({ error: `Invalid Credentials` })
 
-        const token = jwt.sign({ id: getUser._id }, process.env.JWT_SECRET)
+        const token = jwt.sign({ id: getUser[0]._id }, process.env.JWT_SECRET)
 
-        delete getUser.Password
+        getUser[0].password = null
 
         res.status(200).json({ getUser, token })
 
@@ -36,14 +49,11 @@ router.post("/login", async (req, res) => {
 
 router.post("/signup",
 
-    body("Email").isEmail().withMessage(`Not a valid Email.`),
-    body("Fname").isAlphanumeric().withMessage(`Fname Cannot Cantain Special Characters`)
+    body("email").isEmail().withMessage(`Not a valid Email.`),
+    body("name").isAlphanumeric().withMessage(`Name Cannot Contain Special Characters`)
         .isLength({ min: 2, max: 15 }).withMessage(" Fname should be between 2 to 15 characters."),
-    body("Lname").isAlphanumeric().withMessage(`Lname Cannot Cantain Special Characters`)
-        .isLength({ min: 2, max: 15 }).withMessage(" Fname should be between 2 to 15 characters."),
-    body("Gender").notEmpty().withMessage("Gender cannot be empty"),
-    body("Password").matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/, "i")
-        .withMessage("Please enter a password at least 8 character and contain At least one uppercase.At least one lower case.At least one special character."),
+    body("username").isAlphanumeric().withMessage(`username Cannot Contain Special Characters`)
+        .isLength({ min: 2, max: 15 }).withMessage(" username should be between 2 to 15 characters."),
 
     async (req, res) => {
 
@@ -54,33 +64,29 @@ router.post("/signup",
 
         try {
             const {
-                Fname,
-                Lname,
-                Email,
-                DateOfBirth,
-                Password,
-                Gender,
-                Avatar,
-                Bio,
-                Occupation
+                name,
+                username,
+                email,
+                password,
+                avatar
             } = req.body
 
-            const alreadyRegistered = await User.findOne({ Email: Email })
+            console.log(req.body);
 
-            if (alreadyRegistered) return res.status(400).json({ error: `User with ${Email} already exists.` })
+            const alreadyRegistered = await User.find({ email: email })
 
-            const encryptedPassword = await bcrypt.hash(Password, 15)
+            console.log(alreadyRegistered);
+
+            if (alreadyRegistered.length !== 0) return res.status(400).json({ error: `User with ${email} already exists.` })
+
+            const encryptedPassword = await bcrypt.hash(password, 15)
 
             const newUser = new User({
-                Fname,
-                Lname,
-                Email,
-                DateOfBirth,
-                Password: encryptedPassword,
-                Gender,
-                Avatar,
-                Bio,
-                Occupation
+                name,
+                username,
+                email,
+                password: encryptedPassword,
+                avatar
             })
 
             const registeredUser = await newUser.save()
@@ -93,5 +99,14 @@ router.post("/signup",
         }
     })
 
+
+router.get("/test", async (req, res) => {
+    try {
+        const user = await User.find()
+        res.send(user)
+    } catch (error) {
+        console.log(error);
+    }
+})
 
 module.exports = router

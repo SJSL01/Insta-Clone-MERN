@@ -3,7 +3,6 @@ const cors = require("cors");
 const morgan = require("morgan");
 const path = require("path");
 const dotenv = require("dotenv")
-const body_parser = require("body-parser");
 const connect_to_DB = require("./DB Config/DB Connect");
 
 
@@ -25,6 +24,8 @@ app.use(express.json({ limit: "30mb" }))
 app.use("/auth", require("./Routes/Auth.js"))
 app.use("/user", require("./Routes/User.js"))
 app.use("/posts", require("./Routes/Posts.js"))
+app.use("/userchats", require("./Routes/UserChats.js"))
+app.use("/message", require("./Routes/Message.js"))
 
 
 const PORT = 3010 || process.env.PORT

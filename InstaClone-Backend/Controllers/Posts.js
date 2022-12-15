@@ -11,9 +11,8 @@ const createPost = async (req, res) => {
 
         const newPost = await new Post({
             userId: user._id,
-            Fname: user.Fname,
-            Lname: user.Lname,
-            Avatar: user.Avatar,
+            username: user.username,
+            avatar: user.avatar,
             description,
             postImage,
             tags

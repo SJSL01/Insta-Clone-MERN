@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-
+mongoose.set('strictQuery', false);
 const connect_to_DB = () => {
     return mongoose.connect(process.env.DB_Cluster_URL).then(() => {
         console.log("Connected To The Database Successfully");

@@ -10,7 +10,28 @@ const getUserInfo = async (req, res) => {
 
         const user = await User.findById(id)
 
+        user.password = undefined;
+
         res.status(200).json(user)
+
+    } catch (error) {
+
+        res.status(404).json({ error: error.message })
+
+    }
+
+}
+
+const getSuggestions = async (req, res) => {
+
+    try {
+
+        const { id } = req.body;
+
+        const suggestions = await User.find({ followers: { $nin: [id] } })
+        console.log("suggestions" + suggestions);
+
+        res.status(200).json(suggestions)
 
     } catch (error) {
 
@@ -161,4 +182,4 @@ const addRemoveFollowers = async (req, res) => {
 
 
 
-module.exports = { getUserInfo, getUserFollowers, getUserFollowing, addRemoveFollowers, addRemoveFollowing }
+module.exports = { getUserInfo, getUserFollowers, getUserFollowing, addRemoveFollowers, addRemoveFollowing, getSuggestions }

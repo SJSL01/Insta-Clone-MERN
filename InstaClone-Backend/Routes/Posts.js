@@ -5,13 +5,13 @@ const { createPost, getFeed, getUserPosts, likePost } = require("../Controllers/
 const JWT_AUTH = require("../Middlewares/JWT_AUTH")
 
 
-router.post("/createPost", JWT_AUTH, createPost)
+router.post("/createPost", createPost)
 
-router.get("/:id", JWT_AUTH, getFeed)
+router.get("/:id", getFeed)
 
-router.get("/userPosts/:id", JWT_AUTH, getUserPosts)
+router.get("/userPosts/:id", getUserPosts)
 
-router.put("/like/:id", JWT_AUTH, likePost)
+router.put("/like/:id", likePost)
 
 
 module.exports = router;

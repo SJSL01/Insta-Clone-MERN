@@ -1,7 +1,7 @@
 const router = require("express").Router()
 
 const { getUserInfo, getUserFollowers, getUserFollowing,
-    addRemoveFollowing, addRemoveFollowers } = require("../Controllers/User.js")
+    addRemoveFollowing, addRemoveFollowers, getSuggestions } = require("../Controllers/User.js")
 
 const JWT_AUTH = require("../Middlewares/JWT_AUTH")
 
@@ -19,5 +19,7 @@ router.put("/:id/:/:followingId", JWT_AUTH, addRemoveFollowing)
 
 //? addRemove Followers
 router.put("/:id/:followerId", JWT_AUTH, addRemoveFollowers)
+
+router.get("/suggestions", JWT_AUTH, getSuggestions)
 
 module.exports = router;
