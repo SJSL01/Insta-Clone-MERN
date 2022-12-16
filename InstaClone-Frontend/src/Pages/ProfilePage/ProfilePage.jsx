@@ -28,19 +28,23 @@ export default function ProfilePage() {
   const { user } = useContext(AuthContext)
   const { toast } = useContext(ToastContext)
   const [Posts, setPosts] = useState([])
+  const [editedProfile, setEditedProfile] = useState()
 
 
   const handlePost = async () => {
     setShow(false)
-    // setNewPost({ ...newPost, user: currentUser })
-    console.log(newPost);
-    try {
-      // setNewPost({ ...newPost, user: user })
 
+    try {
       const res = await axios.post("http://localhost:3010/posts/createPost", newPost, { headers })
       console.log(res.data);
       toast.success("posted")
       getUserPosts()
+      setNewPost({
+        ...newPost,
+        description: "",
+        tags: "",
+        postImage: ""
+      })
     } catch (error) {
       console.log(error);
     }
@@ -63,7 +67,7 @@ export default function ProfilePage() {
   const getUserPosts = async () => {
     try {
       const res = await axios.get(`http://localhost:3010/posts/userPosts/${user?._id}`, { headers })
-      setPosts(res.data)
+      setPosts(res.data.reverse())
       console.log(Posts);
     } catch (error) {
       console.log(error);
@@ -71,7 +75,6 @@ export default function ProfilePage() {
   }
 
   useEffect(() => {
-
     getUserPosts()
   }, [user])
 
@@ -92,7 +95,41 @@ export default function ProfilePage() {
 
           <div className='usernameSettings'>
             <h1 style={{ display: "inline-block" }}>{user?.username}</h1>
-            <button>EditProfile</button>
+            <>
+              <Button variant="dark" onClick={handleShow}>
+                Edit Profile
+              </Button>
+
+              <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Edit Profile</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  {newPost.postImage ?
+                    <div className='previewImage'>
+                      <img style={{ width: "100%", height: "300px" }} src={newPost?.postImage} alt="preview" />
+                    </div> : <h3>Select a image to preview</h3>
+                  }
+
+                  <FileBase64 multiple={false} onDone={({ base64 }) => { setNewPost({ ...newPost, postImage: base64 }) }} />
+                  <div>
+                    <input type="text" value={newPost.description}
+                      onChange={(e) => { setNewPost({ ...newPost, description: e.target.value }) }} placeholder='description' />
+                    <input type="text" value={newPost.tags}
+                      onChange={(e) => { setNewPost({ ...newPost, tags: e.target.value }) }} placeholder='tags' />
+                  </div>
+
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="danger" onClick={handleClose}>
+                    Discard
+                  </Button>
+                  <Button variant="success" onClick={handlePost}>
+                    Post
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+            </>
             <span>❌</span>
           </div>
 
@@ -164,8 +201,6 @@ export default function ProfilePage() {
           })}
         </div>
       </div>
-
-
     </div>
   )
 }

@@ -10,11 +10,14 @@ export default function Login() {
     password: ""
   })
 
+  const [show, setShow] = useState(false)
+
   const handleInput = (e) => {
     const { name, value } = e.target
 
     setUserData({ ...userData, [name]: value })
   }
+
 
 
   const handleLogin = (e) => {
@@ -43,8 +46,8 @@ export default function Login() {
 
           </div>
           <div >
-            <input type="password" onChange={handleInput} value={userData.password} name='password' placeholder='password' />
-
+            <input type={show ? "text" : "password"} onChange={handleInput} value={userData.password} name='password' placeholder='password' />
+            <div onMouseEnter={() => { setShow(true) }} onMouseLeave={() => { setShow(false) }}>Show</div>
           </div>
 
           <div>

@@ -1,4 +1,3 @@
-
 .card-Container {
     border: 2px solid grey;
     padding: 10px 20px;
@@ -12,13 +11,13 @@
 .cardHead {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    font-size: 30px;
-   
+    font-size: 20px;
+
 }
 
 .Uname {
     font-weight: bold;
+    margin: 0 5px;
 
 }
 

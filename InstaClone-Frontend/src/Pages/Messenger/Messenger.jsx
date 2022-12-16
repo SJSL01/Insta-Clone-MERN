@@ -22,7 +22,7 @@ export default function Messages() {
 
   //! assigning the current user a socket ID
   useEffect(() => {
-    socket.current = io("ws://localhost:3011")
+    socket.current = io("https://instaclone-socket.onrender.com")
     socket.current.on("getMessage", data => {
       setreceivedMessage({
         sender: data.senderId,

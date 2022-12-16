@@ -97,9 +97,17 @@ hr {
     overflow: hidden;
     /* background-color: yellowgreen; */
     border: 1px solid black;
+    transition: 1s;
 }
 
-.posts img{
+.posts div:hover {
+    /* box-shadow: 2px 2px 50px lightgoldenrodyellow; */
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    transition: 1s;
+}
+
+.posts img {
     height: 100%;
     width: 100%;
 }
@@ -108,9 +116,9 @@ hr {
     scale: 1.2;
     rotate: -5deg;
     transition: 1s;
+    /* filter: blur(2px); */
 }
 
 .posts div img:not(:hover) {
-    /* filter: blur(2px); */
     transition: 0.5s;
 }

@@ -1,8 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Card from '../../Components/Card/Card';
-import Navbar from '../../Components/Navbar/Navbar';
+import FeedCard from '../../Components/FeedCard/FeedCard';
 import AuthContext from '../../context/Auth'
 
 import "../../Styles/Home.css"
@@ -11,6 +10,11 @@ export default function Home() {
 
   const { user } = useContext(AuthContext)
   const [suggestions, setSuggestions] = useState(null)
+  const [userFeed, setUserFeed] = useState([])
+
+  // setInterval(() => {
+  //   getFeed()
+  // }, 100000)
 
 
 
@@ -25,6 +29,14 @@ export default function Home() {
   //   }
   // }
 
+  const getFeed = async () => {
+    try {
+      const res = await axios.get(`http://localhost:3010/posts/${user?._id}`)
+      setUserFeed(res.data)
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
 
   const navigate = useNavigate()
@@ -33,6 +45,7 @@ export default function Home() {
     !user && navigate("/")
     // getSuggestions()
     // console.log(user);
+    getFeed()
 
   }, [])
 
@@ -40,8 +53,12 @@ export default function Home() {
     <div className='home-container'>
 
       <div>
-        <Card></Card>
-        <Card></Card>
+        {userFeed.map((post) => {
+          return (
+            <FeedCard post={post} />
+          )
+        })}
+
       </div>
 
       {/* <div className="suggestions">
