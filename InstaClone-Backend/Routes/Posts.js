@@ -1,8 +1,6 @@
 const router = require("express").Router()
 
-const { createPost, getFeed, getUserPosts, likePost } = require("../Controllers/Posts.js")
-
-const JWT_AUTH = require("../Middlewares/JWT_AUTH")
+const { createPost, getFeed, getUserPosts, likePost, commentPost } = require("../Controllers/Posts.js")
 
 
 router.post("/createPost", createPost)
@@ -13,5 +11,6 @@ router.get("/userPosts/:id", getUserPosts)
 
 router.put("/like/:id", likePost)
 
+router.put("/comment/:id", commentPost)
 
 module.exports = router;

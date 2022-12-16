@@ -15,8 +15,6 @@ const app = express()
 app.use(cors())
 app.use(morgan("common"))
 app.use(express.json({ limit: "30mb" }))
-// app.use(body_parser.json({ limit: "20mb" }))
-// app.use(body_parser.urlencoded({ limit: "20mb", extended: true }))
 
 
 //! Routes

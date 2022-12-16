@@ -68,23 +68,42 @@ const getUserPosts = async (req, res) => {
 const likePost = async (req, res) => {
 
     const { id } = req.params
-    const { User_Id } = req.body
+    const User_Id = req.body._id
 
     try {
-
-        // const user = await User.findById(id)
         const post = await Post.findById(id)
-        const isLiked = await post.likes.get(User_Id)
+        const isLiked = await post.likes.indexOf(User_Id)
 
-        if (isLiked) {
-            post.likes.delete(User_Id)
+        if (isLiked !== -1) {
+            post.likes.splice(isLiked, 1)
         } else {
-            post.likes.set(User_Id, true)
+            post.likes.push(User_Id)
         }
 
-        const UpdatedPost = await Post.findOneAndUpdate(id, { likes: post.likes })
+        await post.save()
 
-        res.status(200).json(UpdatedPost)
+        res.send("like")
+
+    } catch (error) {
+        res.status(409).json({ error: error.message })
+    }
+
+}
+const commentPost = async (req, res) => {
+
+    const { id } = req.params
+    const { comment } = req.body
+    const { username } = req.body.user
+    console.log(comment, username);
+
+    try {
+        const post = await Post.findById(id)
+
+        post.comments.push({ username, comment })
+
+        await post.save()
+        
+        res.send("comment")
 
     } catch (error) {
         res.status(409).json({ error: error.message })
@@ -92,4 +111,4 @@ const likePost = async (req, res) => {
 
 }
 
-module.exports = { createPost, getFeed, getUserPosts, likePost }
+module.exports = { createPost, getFeed, getUserPosts, likePost, commentPost }

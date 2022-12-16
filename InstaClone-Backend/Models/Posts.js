@@ -17,9 +17,8 @@ const PostSchema = mongoose.Schema({
     description: String,
 
     likes: {
-        type: Map,
-        of: Boolean,
-        default:{}
+        type: Array,
+        default: []
     },
 
     tags: String,
@@ -27,8 +26,12 @@ const PostSchema = mongoose.Schema({
     comments: {
         type: Array,
         default: []
+    },
+    date: {
+        type:String,
+        default: new Date().toLocaleDateString()
     }
-})
+}, { timestamps: true })
 
 const Post = mongoose.model("POST", PostSchema)
 

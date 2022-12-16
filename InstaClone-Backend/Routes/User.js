@@ -1,12 +1,16 @@
 const router = require("express").Router()
 
-const { getUserInfo, getUserFollowers, getUserFollowing,
+const { getUserInfo, editProfile, getUserFollowers, getUserFollowing,
     addRemoveFollowing, addRemoveFollowers, getSuggestions } = require("../Controllers/User.js")
 
 const JWT_AUTH = require("../Middlewares/JWT_AUTH")
 
 //? get user info
 router.get("/getUserInfo/:id", JWT_AUTH, getUserInfo)
+
+//? edit userProfile 
+
+router.post("/editProfile/:id", JWT_AUTH, editProfile)
 
 //? get user followers
 router.get("/:id/followers", JWT_AUTH, getUserFollowers)

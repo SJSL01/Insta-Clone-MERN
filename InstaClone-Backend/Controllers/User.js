@@ -21,6 +21,27 @@ const getUserInfo = async (req, res) => {
     }
 
 }
+const editProfile = async (req, res) => {
+
+    try {
+
+        const { id } = req.params;
+
+        const { avatar, bio } = req.body
+
+        const user = await User.findByIdAndUpdate(id, {})
+
+        user.password = undefined;
+
+        res.status(200).json(user)
+
+    } catch (error) {
+
+        res.status(404).json({ error: error.message })
+
+    }
+
+}
 
 const getSuggestions = async (req, res) => {
 
@@ -182,4 +203,4 @@ const addRemoveFollowers = async (req, res) => {
 
 
 
-module.exports = { getUserInfo, getUserFollowers, getUserFollowing, addRemoveFollowers, addRemoveFollowing, getSuggestions }
+module.exports = { getUserInfo, editProfile, getUserFollowers, getUserFollowing, addRemoveFollowers, addRemoveFollowing, getSuggestions }
